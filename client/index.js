@@ -4,6 +4,27 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((data) => loadHTMLTable(data["data"]));
 });
 
+// NOT WORKING, ADDS LISTENER BUT THEN DOESNT LISTEN
+document.getElementById("table").addEventListener("click", (event) => {
+  if (event.target.className === "delete-row-btn") {
+    console.log("Deleting row with id:", event.target.dataset.id);
+    deleteRowById(event.target.dataset.id);
+  }
+
+  if (event.target.className === "edit-row-btn") {
+    console.log("Editing row with id:", event.target.dataset.id);
+    handleEditRow(event.target.dataset.id);
+  }
+});
+
+function deleteRowById(id) {
+  fetch("http://localhost:5000/delete/" + id, {
+    method: "DELETE",
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+}
+
 const addBtn = document.querySelector("#add-name-btn");
 
 addBtn.onclick = () => {
@@ -24,6 +45,7 @@ addBtn.onclick = () => {
 };
 
 function insertRowIntoTable(data) {
+  console.log(data);
   const table = document.querySelector("table tbody");
   const isTableData = table.querySelector(".no-data");
 

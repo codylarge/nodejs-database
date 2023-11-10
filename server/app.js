@@ -37,6 +37,9 @@ app.get("/getAll", (request, response) => {
 // update
 
 // delete
+app.delete("/delete/:id", (request, response) => {
+  console.log(request.params);
+});
 
 app.listen(process.env.PORT, () =>
   console.log("Server is running on port " + process.env.PORT + "...")
