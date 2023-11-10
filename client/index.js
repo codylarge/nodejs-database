@@ -22,7 +22,11 @@ function deleteRowById(id) {
     method: "DELETE",
   })
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+      if (data.success) {
+        location.reload();
+      }
+    });
 }
 
 const addBtn = document.querySelector("#add-name-btn");
