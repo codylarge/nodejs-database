@@ -4,16 +4,19 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((data) => loadHTMLTable(data["data"]));
 });
 
-// NOT WORKING, ADDS LISTENER BUT THEN DOESNT LISTEN
 document.getElementById("table").addEventListener("click", (event) => {
-  if (event.target.className === "delete-row-btn") {
-    console.log("Deleting row with id:", event.target.dataset.id);
-    deleteRowById(event.target.dataset.id);
-  }
+  const targetClass = event.target.className;
 
-  if (event.target.className === "edit-row-btn") {
-    console.log("Editing row with id:", event.target.dataset.id);
-    handleEditRow(event.target.dataset.id);
+  if (targetClass === "delete-row-btn" || targetClass === "edit-row-btn") {
+    const rowId = event.target.dataset.id;
+
+    if (targetClass === "delete-row-btn") {
+      console.log("Deleting row with id:", rowId);
+      deleteRowById(rowId);
+    } else if (targetClass === "edit-row-btn") {
+      console.log("Editing row with id:", rowId);
+      handleEditRow(rowId);
+    }
   }
 });
 
