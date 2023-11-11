@@ -82,6 +82,24 @@ class DbService {
       return false;
     }
   }
+
+  async searchByName(name) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = "SELECT * FROM names WHERE name = ?";
+
+        connection.query(query, [name], (error, results) => {
+          if (error) reject(new Error(error.message));
+          resolve(results);
+        });
+      });
+
+      //console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = DbService;

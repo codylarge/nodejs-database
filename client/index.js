@@ -29,7 +29,22 @@ function deleteRowById(id) {
     });
 }
 
+function handleEditRow(id) {
+  const updateSection = document.querySelector("#update-row");
+  updateSection.hidden = false;
+  document.querySelector("#update-name-input").dataset.id = id;
+}
+
 const addBtn = document.querySelector("#add-name-btn");
+const searchBtn = document.querySelector("#search-btn");
+
+searchBtn.onclick = () => {
+  const searchValue = document.querySelector("#search-input").value;
+
+  fetch("http://localhost:5000/search/" + searchValue)
+    .then((response) => response.json())
+    .then((data) => loadHTMLTable(data["data"]));
+};
 
 addBtn.onclick = () => {
   const nameInput = document.querySelector("#name-input");

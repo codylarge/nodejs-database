@@ -48,6 +48,18 @@ app.delete("/delete/:id", (request, response) => {
     .catch((err) => console.log(err));
 });
 
+// Search
+app.get("/search/:name", (request, response) => {
+  const { name } = request.params;
+  const db = dbService.getDbServiceInstance();
+
+  const result = db.searchByName(name);
+
+  result
+    .then((data) => response.json({ data: data }))
+    .catch((err) => console.log(err));
+});
+
 app.listen(process.env.PORT, () =>
   console.log("Server is running on port " + process.env.PORT + "...")
 );
