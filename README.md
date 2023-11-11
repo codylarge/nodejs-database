@@ -1,2 +1,2 @@
 # nodejs-database
-A near identical database to the "simple-database" php project but using js and express instead of php (Still MySQL))
+A more robust version of the php database with realtime display, made with nodejs, mySQL and express
